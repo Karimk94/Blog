@@ -1,47 +1,51 @@
-import { createTheme } from '@mui/material/styles';
+'use client';
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#1976d2',
-        },
-        secondary: {
-            main: '#dc004e',
-        },
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+
+let theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
     },
-    typography: {
-        fontFamily: [
-            'Roboto',
-            'Arial',
-            'sans-serif',
-        ].join(','),
-        h1: {
-            fontSize: '2.2rem',
-            fontWeight: 600,
-        },
-        h2: {
-            fontSize: '1.8rem',
-            fontWeight: 500,
-        },
-        h3: {
-            fontSize: '1.5rem',
-            fontWeight: 500,
-        },
+    secondary: {
+      main: '#dc004e',
     },
-    components: {
-        MuiCard: {
-            styleOverrides: {
-                root: {
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                        transform: 'translateY(-4px)',
-                        boxShadow: '0 10px 15px rgba(0, 0, 0, 0.1)',
-                    },
-                },
-            },
-        },
+  },
+  typography: {
+    fontFamily: [
+      'Roboto',
+      'Arial',
+      'sans-serif',
+    ].join(','),
+    h1: {
+      fontSize: '2.2rem',
+      fontWeight: 600,
     },
+    h2: {
+      fontSize: '1.8rem',
+      fontWeight: 500,
+    },
+    h3: {
+      fontSize: '1.5rem',
+      fontWeight: 500,
+    },
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            transform: 'translateY(-4px)',
+            boxShadow: '0 10px 15px rgba(0, 0, 0, 0.1)',
+          },
+        },
+      },
+    },
+  },
 });
+
+theme = responsiveFontSizes(theme);
 
 export default theme;

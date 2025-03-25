@@ -1,12 +1,14 @@
-import { Card, CardContent, CardActions, Typography, Button, Box } from '@mui/material';
-import { BlogPost } from '../../types';
+'use client';
+
+import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import Link from 'next/link';
+import { BlogPost } from '../../types';
 
 interface BlogCardProps {
     post: BlogPost;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
+const BlogCard = ({ post }: BlogCardProps) => {
     return (
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flexGrow: 1 }}>
@@ -21,8 +23,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Link href={`/posts/${post.id}`} passHref>
-                    <Button size="small" color="primary" component="a">
+                <Link href={`/posts/${post.id}`} style={{ textDecoration: 'none' }}>
+                    <Button size="small" color="primary">
                         Read More
                     </Button>
                 </Link>

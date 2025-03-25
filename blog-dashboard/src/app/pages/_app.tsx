@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import Layout from '../components/Layout/Layout';
+import Layout from '../layout';
 import { store } from '../store';
 import theme from '../theme';
 

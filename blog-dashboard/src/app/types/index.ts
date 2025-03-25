@@ -4,15 +4,16 @@ export interface BlogPost {
     body: string;
     author: string;
     excerpt?: string;
-}
-
-export interface NewBlogPost {
+    userId?: number;
+  }
+  
+  export interface NewBlogPost {
     title: string;
     body: string;
     author: string;
-}
-
-export interface ApiError {
+  }
+  
+  export interface ApiError {
     status: number;
     data: any;
-}
+  }

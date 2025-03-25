@@ -1,11 +1,12 @@
+'use client';
 
-import { Alert, Box, Button, Paper, Snackbar, TextField, Typography } from '@mui/material';
-import { useRouter } from 'next/router';
+import { Alert, Box, Button, CircularProgress, Paper, Snackbar, TextField, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useAddPostMutation } from '../../store/api/blogApi';
+import { useAddPostMutation } from '../../lib/redux/features/blogApi';
 import { NewBlogPost } from '../../types';
 
-const NewPostForm: React.FC = () => {
+const NewPostForm = () => {
     const router = useRouter();
     const [formData, setFormData] = useState<NewBlogPost>({
         title: '',
@@ -55,8 +56,9 @@ const NewPostForm: React.FC = () => {
             setFormData({ title: '', body: '', author: '' });
 
             // Redirect to home page after a short delay
+            // Navigate to the first page to see the newly added post at the top
             setTimeout(() => {
-                router.push('/');
+                router.push('/?page=1');
             }, 1500);
         } catch (error) {
             console.error('Failed to add post:', error);
@@ -115,6 +117,7 @@ const NewPostForm: React.FC = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         disabled={isLoading}
+                        startIcon={isLoading ? <CircularProgress size={20} color="inherit" /> : null}
                     >
                         {isLoading ? 'Publishing...' : 'Publish Post'}
                     </Button>
@@ -127,7 +130,7 @@ const NewPostForm: React.FC = () => {
                 onClose={() => setOpenSnackbar(false)}
             >
                 <Alert severity="success" sx={{ width: '100%' }}>
-                    Blog post successfully published!
+                    Blog post successfully published! Redirecting to home page...
                 </Alert>
             </Snackbar>
         </Box>

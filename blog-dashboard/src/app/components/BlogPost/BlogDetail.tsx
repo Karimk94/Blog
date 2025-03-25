@@ -1,13 +1,15 @@
-import { Typography, Box, Paper, CircularProgress, Alert, Button } from '@mui/material';
-import { useGetPostQuery } from '../../store/api/blogApi';
-import Link from 'next/link';
+'use client';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Alert, Box, Button, CircularProgress, Paper, Typography } from '@mui/material';
+import Link from 'next/link';
+import { useGetPostQuery } from '../../lib/redux/features/blogApi';
 
 interface BlogDetailProps {
     postId: number;
 }
 
-const BlogDetail: React.FC<BlogDetailProps> = ({ postId }) => {
+const BlogDetail = ({ postId }: BlogDetailProps) => {
     const { data: post, isLoading, isError } = useGetPostQuery(postId);
 
     if (isLoading) {
@@ -28,11 +30,10 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ postId }) => {
 
     return (
         <Box>
-            <Link href="/" passHref>
+            <Link href="/" style={{ textDecoration: 'none' }}>
                 <Button
                     startIcon={<ArrowBackIcon />}
                     sx={{ mb: 2 }}
-                    component="a"
                 >
                     Back to Posts
                 </Button>
