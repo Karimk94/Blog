@@ -2,7 +2,8 @@
 
 import { Alert, Box, Button, CircularProgress, Paper, Snackbar, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { createLocalPost } from '../../lib/localStoragePosts';
 import { useAddPostMutation } from '../../lib/redux/features/blogApi';
 import { NewBlogPost } from '../../types';
 
@@ -49,19 +50,28 @@ const NewPostForm = () => {
         if (!validate()) return;
 
         try {
-            await addPost(formData).unwrap();
+            const result = await addPost(formData).unwrap();
+
+            createLocalPost(formData);
+
             setOpenSnackbar(true);
 
-            // Reset form
             setFormData({ title: '', body: '', author: '' });
 
-            // Redirect to home page after a short delay
-            // Navigate to the first page to see the newly added post at the top
             setTimeout(() => {
-                router.push('/?page=1');
+                router.push('/');
             }, 1500);
         } catch (error) {
             console.error('Failed to add post:', error);
+
+            createLocalPost(formData);
+            setOpenSnackbar(true);
+
+            setFormData({ title: '', body: '', author: '' });
+
+            setTimeout(() => {
+                router.push('/');
+            }, 1500);
         }
     };
 
